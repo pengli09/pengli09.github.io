@@ -3,16 +3,21 @@ body {
   background-color: #FFFFFF;
   margin: auto;
   width: 900px;
+  text-align: center; /* for IE */
+}
+
+div {
+  clear: left;
+  width: 900px;
   text-align: justify;
-    font-family: arial;
 }
 
 img#id-photo {
-  vertical-align: middle;
   border: 0;
   float: left;
   margin: 0px 20px 20px 0px;
   height: 200;
+  clear: right;
 }
 
 #google-scholar {
@@ -33,7 +38,14 @@ a:link,a:visited,a:active {
   border-bottom: 1px dotted;
 }
 
-#last-updated {
-  width:100%;
-  float:left;
+div#info {
+  margin-bottom: 2em;
+}
+
+h3 {
+  margin-bottom: 0em;
+}
+
+div#last-updated {
+  clear: left;
 }
