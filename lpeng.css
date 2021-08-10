@@ -49,3 +49,7 @@ h3 {
 div#last-updated {
   clear: left;
 }
+
+span#title {
+  color: #3498DB;
+}
