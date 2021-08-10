@@ -36,7 +36,7 @@ ul li{
 a:link,a:visited,a:active {
   text-decoration: none;
   border-bottom: 1px dotted;
-  color: #3498DB;
+  color: #3462DB;
 }
 
 div#info {
@@ -52,7 +52,7 @@ div#last-updated {
 }
 
 span#title {
-  color: #3498DB;
+  color: #3462DB;
 }
 
 strong {
