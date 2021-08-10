@@ -2,13 +2,13 @@ body {
   color: #000000;
   background-color: #FFFFFF;
   margin: auto;
-  width: 900px;
+  width: 1024px;
   text-align: center; /* for IE */
 }
 
 div {
   clear: left;
-  width: 900px;
+  width: 1024px;
   text-align: justify;
 }
 
@@ -36,6 +36,7 @@ ul li{
 a:link,a:visited,a:active {
   text-decoration: none;
   border-bottom: 1px dotted;
+  color: #3498DB;
 }
 
 div#info {
@@ -52,4 +53,9 @@ div#last-updated {
 
 span#title {
   color: #3498DB;
+}
+
+strong {
+  font-size: 1.1em;
+  margin: 0.5em 0px 0.5em -1.2em;
 }
