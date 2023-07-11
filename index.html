@@ -21,7 +21,7 @@
         border: 0;
         float: left;
         margin: 0px 20px 20px 0px;
-        height: 260;
+        height: 200;
         clear: right;
       }
 
@@ -67,6 +67,12 @@
 
       span#highlight {
         color: #BB0000;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      span#bold {
+        font-weight: bold;
       }
 
       strong {
@@ -77,19 +83,26 @@
     </style>
   </head>
   <body>
-    <div id="photo">
-      <img id="id-photo" src="images/pic.jpeg" alt="Peng Li's photo">
-    </div>
-    <div id="info">
-      <h1>Peng Li</h1>
-      <h4>Research Associate Professor</h4>
-      <a href="https://air.tsinghua.edu.cn/">Institute for AI Industry Research (AIR)</a>, <a href="https://www.tsinghua.edu.cn/">Tsinghua University</a>, China</br>
-      Contact: pengli09 at gmail.com
-    </div>
+    <table>
+      <td><img id="id-photo" src="images/pic.jpeg" alt="Peng Li's photo"></td>
+      <td width="5"> &nbsp; </td>
+      <td>
+        <div id="info">
+          <h1>Peng Li</h1>
+          <h4>Research Associate Professor</h4>
+          <a href="https://air.tsinghua.edu.cn/">Institute for AI Industry Research (AIR)</a>,<br/>
+          <a href="https://www.tsinghua.edu.cn/">Tsinghua University</a>, China</br>
+          <br/><br/>
+          <span id="bold">Email</span>: pengli09 at gmail.com
+          <br/>
+          <span id="bold">Address</span>: 11 / F, Bblock C, Qidi Science and Technology Building, Tsinghua Science and Technology Park, Haidian District, Beijing
+        </div>
+      </td>
+    </table>
 
     <div id="bio">
-      <h2>Bio</h2>
-      Peng Li is a Research Associate Professor at Institute for AI Industry Research (AIR), Tsinghua University. He received his B.S. degree in computer science and technology from Tsinghua University in 2009 and his Ph.D. in computer science and technology from Tsinghua University in 2015. Before joining Tsinghua, he was a principal researcher and team leader at WeChat AI, Tencent. He also previously worked at Institute of Deep Learning (IDL), Baidu Inc. His research interests include artificial intelligence and natural language processing. He received ACL 2023 Outstanding Paper Award and First Prize of Qian Weichang Chinese Information Processing Science and Technology Award.
+      <!--h2>Bio</h2--!>
+      Peng Li is a Research Associate Professor at Institute for AI Industry Research (AIR), Tsinghua University, China. He received his B.S. degree in computer science and technology from Tsinghua University in 2009 and his Ph.D. in computer science and technology from Tsinghua University in 2015. Before joining Tsinghua, he was a principal researcher and team leader at WeChat AI, Tencent. He also previously worked at Institute of Deep Learning (IDL), Baidu Inc. His research interests include artificial intelligence and natural language processing. He received ACL 2023 Outstanding Paper Award and First Prize of Qian Weichang Chinese Information Processing Science and Technology Award.
     </div>
 
     <div id="publications">
@@ -98,11 +111,11 @@
       <div id="google-scholar"><a href="http://scholar.google.com/citations?user=hgYzkOQAAAAJ&hl=en">Google Scholar Citations</a></div>
       <ul>
         <h3><strong>2023</strong></h3>
-           <li>Qinhong Zhou, Zonghan Yang, Peng Li and Yang Liu. 2023. <br/> <span id="title">Bridging the Gap between Decision and Logits in Decision-based Knowledge Distillation for Pre-trained Language Models</span>. <br/> In <i>Proceedings of ACL 2023</i>, 13234-13248. [<a href="https://aclanthology.org/2023.acl-long.738.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2306.08909">arXiv</a>] [<a href="https://github.com/THUNLP-MT/DBKD-PLM">code</a>]</li>
+           <li>Kaiyu Huang, Peng Li, Jin Ma, Ting Yao and Yang Liu. 2023. <br/> <span id="title">Knowledge Transfer in Incremental Learning for Multilingual Neural Machine Translation</span>. <br/> In <i>Proceedings of ACL 2023</i>, 15286-15304. [<a href="https://aclanthology.org/2023.acl-long.852.pdf">pdf</a>] <br/> <span id="highlight">(ACL 2023 Outstanding Paper)</span></li>
+          <li>Qinhong Zhou, Zonghan Yang, Peng Li and Yang Liu. 2023. <br/> <span id="title">Bridging the Gap between Decision and Logits in Decision-based Knowledge Distillation for Pre-trained Language Models</span>. <br/> In <i>Proceedings of ACL 2023</i>, 13234-13248. [<a href="https://aclanthology.org/2023.acl-long.738.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2306.08909">arXiv</a>] [<a href="https://github.com/THUNLP-MT/DBKD-PLM">code</a>]</li>
           <li>Chi Chen, Peng Li, Maosong Sun and Yang Liu. 2023. <br/> <span id="title">Weakly Supervised Vision-and-Language Pre-training with Relative Representations</span>. <br/> In <i>Proceedings of ACL 2023</i>, 8341-8355. [<a href="https://aclanthology.org/2023.acl-long.464.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2305.15483">arXiv</a>] [<a href="https://github.com/THUNLP-MT/RELIT">code</a>]</li>
           <li>Xuancheng Huang, Zijun Liu, Peng Li, Tao Li, Maosong Sun and Yang Liu. 2023. <br/> <span id="title">An Extensible Plug-and-Play Method for Multi-Aspect Controllable Text Generation</span>. <br/> In <i>Proceedings of ACL 2023</i>, 15233-15256. [<a href="https://aclanthology.org/2023.acl-long.849.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2212.09387">arXiv</a>] [<a href="https://github.com/THUNLP-MT/PromptGating4MCTG">code</a>]</li>
           <li>Yuanchi Zhang, Peng Li, Maosong Sun and Yang Liu. 2023. <br/> <span id="title">Continual Knowledge Distillation for Neural Machine Translation</span>. <br/> In <i>Proceedings of ACL 2023</i>, 7978-7996. [<a href="https://aclanthology.org/2023.acl-long.443.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2212.09097">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CKD">code</a>]</li>
-          <li>Kaiyu Huang, Peng Li, Jin Ma, Ting Yao and Yang Liu. 2023. <br/> <span id="title">Knowledge Transfer in Incremental Learning for Multilingual Neural Machine Translation</span>. <br/> In <i>Proceedings of ACL 2023</i>, 15286-15304. [<a href="https://aclanthology.org/2023.acl-long.852.pdf">pdf</a>] <br/> (<span id="highlight">ACL 2023 Outstanding Paper</span>)</li>
           <li>Yuanjian Xu, Qi An, Jiahuan Zhang, Peng Li and Zaiqing Nie. 2023. <br/> <span id="title">Hard Sample Aware Prompt-Tuning</span>. <br/> In <i>Proceedings of ACL 2023</i>, 12356-12369. [<a href="https://aclanthology.org/2023.acl-long.690.pdf">pdf</a>]</li>
           <li>Zhengyan Zhang, Zhiyuan Zeng, Yankai Lin, Huadong Wang, Deming Ye, Chaojun Xiao, Xu Han, Zhiyuan Liu, Peng Li, Maosong Sun and Jie Zhou. 2023. <br/> <span id="title">Plug-and-Play Knowledge Injection for Pre-trained Language Models</span>. <br/> In <i>Proceedings of ACL 2023</i>, 10641-10658. [<a href="https://aclanthology.org/2023.acl-long.594.pdf">pdf</a>]</li>
           <li>Zhicheng Guo, Sijie Cheng, Yile Wang, Peng Li and Yang Liu. 2023. <br/> <span id="title">Prompt-Guided Retrieval Augmentation for Non-Knowledge-Intensive Tasks</span>. <br/> In <i>Findings of ACL 2023</i>, 10896-10912. [<a href="https://aclanthology.org/2023.findings-acl.693.pdf">pdf</a>]</li>
@@ -207,13 +220,13 @@
     <div id="education">
       <h2>Education</h2>
       <ul>
-        <li>Aug, 2009 - Jan, 2015. Ph.D in Dept. of Computer Science and Technology, Tsinghua University, Beijing</li>
-        <li>Aug, 2005 - Jul, 2009.  B.S. in Dept. of Computer Science and Technology, Tsinghua University, Beijing</li>
+        <li>Aug, 2009 - Jan, 2015. Ph.D in Dept. of Computer Science and Technology, Tsinghua University, Beijing, China.</li>
+        <li>Aug, 2005 - Jul, 2009. B.S. in Dept. of Computer Science and Technology, Tsinghua University, Beijing, China.</li>
       </ul>
     </div>
 
     <div id="last-updated">
-      Last-updated: Jul 10, 2023.
+      Last-updated: Jul 11, 2023.
     </div>
   </body>
 </html>
