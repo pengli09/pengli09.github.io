@@ -47,6 +47,44 @@
     .two-col{columns:1; column-gap:28px}
     @media(min-width:900px){.two-col{columns:2}}
     @media print{a{text-decoration:none} header{grid-template-columns:auto 1fr} .badge,.btn{border:1px solid #ccc}}
+
+    /* Two-column flow for the single Services list (mobile → 1 col, desktop → 2 cols) */
+    #services .list.responsive-cols { column-gap: 24px; }
+    @media (min-width: 900px) {
+      #services .list.responsive-cols { columns: 2; }
+    }
+    /* Keep items from breaking awkwardly across columns */
+    #services .list.responsive-cols li { break-inside: avoid; overflow-wrap: anywhere; word-break: break-word; }
+
+    /* --- Match Professional Services width with Publications --- */
+    /* Ensure the services section uses the same max width as .container (1000px) */
+    #services {
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Make its list span the full container width */
+    #services .list.responsive-cols {
+      column-gap: 32px; /* slightly wider spacing for readability */
+      width: 100%;
+    }
+
+    /* On large screens, show 2 balanced columns like Publications */
+    @media (min-width: 900px) {
+      #services .list.responsive-cols {
+        columns: 2;
+        column-fill: balance;
+      }
+    }
+
+    /* Keep items intact within a column */
+    #services .list.responsive-cols li {
+      break-inside: avoid;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
   </style>
 </head>
 <body>
@@ -613,8 +651,8 @@
 
     <section class="section" id="services">
       <h2>Professional Services</h2>
-      <div class="grid grid-cols-2">
-        <ul class="list">
+      <div class="grid">
+        <ul class="list responsive-cols">
           <li><strong>Senior Area Chair</strong>: AACL (2022)</li>
           <li><strong>Area Chair</strong>:<!--ICLR (2026), --> ACL (2024–2025), EMNLP (2024), NAACL (2024–2025), EACL (2024), COLING (2022)<!--, AACL (2025)--></li>
           <li><strong>Action Editor</strong>: ACL Rolling Review (ARR)</li>
@@ -623,8 +661,6 @@
           <li><strong>Demonstration Chair</strong>: CCL (2024)</li>
           <li><strong>Frontier Forum Chair</strong>: CCMT (2024)</li>
           <li><strong>Publicity Chair</strong>: CCL (2025)</li>
-        </ul>
-        <ul class="list">
           <li><strong>Reviewer / PC Member</strong>: NeurIPS (2022–2025), ICML (2022–2025), ICLR (2024–2025), ACL (2014, 2021–2023), EMNLP (2014, 2021–2023), NAACL (2018), CVPR (2023–2025<!--2026-->), ICCV (2023, 2025), ECCV (2024), AAAI (2022–2025), IJCAI (2022–2024), COLING (2020, 2024, 2025), BMVC (2024), COLM (2024–2025), ICRA (2025-2026), ACM TIST (2015), TACL (Standing Reviewer), Acta Automatica Sinica</li>
         </ul>
       </div>
