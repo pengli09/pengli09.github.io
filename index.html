@@ -7,101 +7,145 @@
   <meta name="description" content="Peng Li is a Research Associate Professor at Tsinghua University's Institute for AI Industry Research (AIR). Research interests: LLMs, LLM-based Agents, AI4Math, MLLMs." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>"> 
   <style>
-    :root{ --bg:#ffffff; --fg:#1b1f24; --muted:#5c6672; --link:#3462DB; --link-visited:#5B2C6F; --card:#f7f9fc; --border:#e5e7eb; --accent:#0ea5e9; }
-    @media (prefers-color-scheme: dark){
-      :root{ --bg:#0b1020; --fg:#e6e7ea; --muted:#99a2b2; --link:#7aa8ff; --link-visited:#c697ff; --card:#0f152b; --border:#1f2940; --accent:#38bdf8; }
+    :root{
+      --bg:#f4f8fb;
+      --bg-strong:#eaf2f8;
+      --fg:#0f1b2a;
+      --muted:#526176;
+      --link:#0f4db8;
+      --card:#ffffffcc;
+      --panel:#ffffff;
+      --border:#cddceb;
+      --accent:#106ad8;
+      --accent-soft:#deecff;
+      --shadow:0 12px 40px rgba(16,44,80,.14);
+      --radius:18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--fg)}
+    body{
+      margin:0;
+      font:16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(circle at 5% 8%, #dfefff 0, transparent 44%),
+        radial-gradient(circle at 94% 12%, #e9ffd9 0, transparent 35%),
+        linear-gradient(180deg, var(--bg-strong), var(--bg));
+      background-attachment: fixed;
+    }
     a{color:var(--link); text-decoration:none}
     a:hover{text-decoration:underline}
-    a:visited{color:var(--link-visited)}
-    .container{max-width:1000px; margin:0 auto; padding:28px 20px 60px}
-    header{display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; margin-top:12px; margin-bottom:20px}
+    .container{
+      max-width:1060px;
+      margin:0 auto;
+      padding:30px 18px 64px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:130px 1fr;
+      gap:20px;
+      align-items:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      backdrop-filter: blur(8px);
+      box-shadow:var(--shadow);
+      border-radius:calc(var(--radius) + 4px);
+      padding:22px;
+      animation:rise .55s ease both;
+    }
     .avatar{width:120px; height:auto; border-radius:12px; object-fit:contain; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.15)}
-    .title h1{font-size:32px; line-height:1.2; margin:0}
-    .title .role{color:var(--muted); margin-top:6px}
-    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
-    .badge{display:inline-flex; gap:8px; align-items:center; border:1px solid var(--border); background:var(--card); padding:6px 10px; border-radius:999px; font-size:14px}
+    h1,h2{margin:0}
+    .title h1{font-size:clamp(2rem, 3.8vw, 2.6rem); line-height:1.2; letter-spacing:0; font-weight:700}
+    .role{margin-top:6px; color:var(--muted); font-weight:600}
+    .affiliation{margin-top:4px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:14px;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .badge:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(17,60,110,.12); text-decoration:none}
     .badge svg{width:16px; height:16px}
-    .section{margin-top:34px}
-    .section h2{font-size:22px; margin:0 0 12px 0; border-bottom:1px dashed var(--border); padding-bottom:6px}
-    .prose{color:var(--fg)}
-    .grid{display:grid; gap:14px}
-    @media(min-width:820px){.grid-cols-2{grid-template-columns:1fr 1fr}}
+    .section{
+      margin-top:24px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 4px 18px rgba(17,44,80,.06);
+      animation:rise .55s ease both;
+    }
+    .section h2{font-size:1.45rem; font-weight:700; margin-bottom:10px; color:#14385f}
+    .prose{margin:0}
     .list{list-style:none; padding:0; margin:0}
-    .list .item{padding:8px 0; border-bottom:1px dashed var(--border)}
-    .pub-title{font-weight:600}
+    .list .item{padding:9px 0; border-bottom:1px dashed var(--border); break-inside:avoid}
+    .pub-title{font-weight:700}
     .pub-venue{font-style:italic}
-    .item.highlight{background:rgba(14,165,233,.08); border-left:3px solid var(--accent); padding-left:10px}
-    .hl-line{margin-top:4px}
+    .hl-line{margin-top:5px}
     .hl{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:var(--accent); color:#fff}
     .small{font-size:14px; color:var(--muted)}
-    .chips{display:flex; flex-wrap:wrap; gap:8px}
-    .chip{background:var(--card); border:1px solid var(--border); padding:2px 8px; border-radius:999px; font-size:12px}
-    footer{margin-top:36px; color:var(--muted)}
-    .toolbar{display:flex; gap:10px; align-items:center}
-    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background:var(--bg); padding:8px 12px; border-radius:10px}
-    .btn:hover{background:var(--card)}
-    details.pub{padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:var(--card)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .chip{background:var(--accent-soft); border:1px solid #bdd8ff; color:#12488a; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.02em}
+    .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg,#fff,#f3f8ff);
+      padding:8px 12px;
+      border-radius:12px;
+      font-weight:600;
+    }
+    .btn:hover{text-decoration:none; filter:brightness(.98)}
+    details.pub{padding:12px; border:1px solid var(--border); border-radius:14px; background:#fdfefe}
     details.pub + details.pub{margin-top:10px}
-    summary{cursor:pointer; font-weight:600}
-    .two-col{columns:1; column-gap:28px}
-    @media(min-width:900px){.two-col{columns:2}}
-    @media print{a{text-decoration:none} header{grid-template-columns:auto 1fr} .badge,.btn{border:1px solid #ccc}}
-
-    /* Two-column flow for the single Services list (mobile → 1 col, desktop → 2 cols) */
-    #services .list.responsive-cols { column-gap: 24px; }
-    @media (min-width: 900px) {
-      #services .list.responsive-cols { columns: 2; }
+    summary{cursor:pointer; font-weight:700; color:#0f3058}
+    .two-col{columns:1; column-gap:26px}
+    @media(min-width:940px){.two-col{columns:2}}
+    #services .list.responsive-cols{column-gap:28px}
+    @media (min-width: 940px){#services .list.responsive-cols{columns:2}}
+    #services .list.responsive-cols li{break-inside:avoid; overflow-wrap:anywhere; word-break:break-word}
+    footer{color:var(--muted)}
+    @media(max-width:760px){
+      .hero{grid-template-columns:1fr; text-align:left}
+      .avatar{width:120px}
+      .toolbar{flex-direction:column; align-items:flex-start}
     }
-    /* Keep items from breaking awkwardly across columns */
-    #services .list.responsive-cols li { break-inside: avoid; overflow-wrap: anywhere; word-break: break-word; }
-
-    /* --- Match Professional Services width with Publications --- */
-    /* Ensure the services section uses the same max width as .container (1000px) */
-    #services {
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
+    @media (prefers-reduced-motion: reduce){
+      .hero,.section{animation:none}
+      .badge{transition:none}
     }
-
-    /* Make its list span the full container width */
-    #services .list.responsive-cols {
-      column-gap: 32px; /* slightly wider spacing for readability */
-      width: 100%;
+    @keyframes rise{
+      from{opacity:0; transform:translateY(8px)}
+      to{opacity:1; transform:translateY(0)}
     }
-
-    /* On large screens, show 2 balanced columns like Publications */
-    @media (min-width: 900px) {
-      #services .list.responsive-cols {
-        columns: 2;
-        column-fill: balance;
-      }
+    @media print{
+      body{background:#fff}
+      .section,.hero{box-shadow:none}
+      a{text-decoration:none}
     }
-
-    /* Keep items intact within a column */
-    #services .list.responsive-cols li {
-      break-inside: avoid;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <header class="hero">
       <img class="avatar" src="images/pic.jpeg" alt="Peng Li portrait" itemprop="image" />
       <div class="title">
         <h1 itemprop="name">Peng Li</h1>
         <div class="role" itemprop="jobTitle">Research Associate Professor</div>
-        <div class="small" itemprop="affiliation" itemscope itemtype="https://schema.org/CollegeOrUniversity">
+        <div class="small affiliation" itemprop="affiliation" itemscope itemtype="https://schema.org/CollegeOrUniversity">
           <a href="https://air.tsinghua.edu.cn/" itemprop="name">Institute for AI Industry Research (AIR)</a>,
           <a href="https://www.tsinghua.edu.cn/">Tsinghua University</a>, China
         </div>
-        <div class="badges" aria-label="quick links">
+        <div class="cta-row" aria-label="quick links">
           <a class="badge" href="#" id="email-link" title="Email">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 4.5h19.5v15H2.25z" fill="none" stroke="currentColor"/><path d="M3 6l9 6 9-6"/></svg>
             Email
@@ -876,7 +920,7 @@
     </section>
 
     <footer class="section">
-      <div class="small">Last updated: <span id="lastUpdated">Mar 07, 2026</span></div>
+      <div class="small">Last updated: <span id="lastUpdated">Mar 08, 2026</span></div>
     </footer>
   </div>
 
