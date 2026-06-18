@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/Person">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peng Li — Datasets</title>
+  <meta name="description" content="Peng Li is a Research Associate Professor at Tsinghua University's Institute for AI Industry Research (AIR). Research interests: LLMs, LLM-based Agents, AI4Math, MLLMs." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>"> 
+  <style>
+    :root{
+      --bg:#f4f8fb;
+      --bg-strong:#eaf2f8;
+      --fg:#0f1b2a;
+      --muted:#526176;
+      --link:#0f4db8;
+      --card:#ffffffcc;
+      --panel:#ffffff;
+      --border:#cddceb;
+      --accent:#106ad8;
+      --accent-soft:#deecff;
+      --shadow:0 12px 40px rgba(16,44,80,.14);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font:16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(circle at 5% 8%, #dfefff 0, transparent 44%),
+        radial-gradient(circle at 94% 12%, #e9ffd9 0, transparent 35%),
+        linear-gradient(180deg, var(--bg-strong), var(--bg));
+      background-attachment: fixed;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{
+      max-width:1060px;
+      margin:0 auto;
+      padding:30px 18px 64px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:130px 1fr;
+      gap:20px;
+      align-items:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      backdrop-filter: blur(8px);
+      box-shadow:var(--shadow);
+      border-radius:calc(var(--radius) + 4px);
+      padding:22px;
+      animation:rise .55s ease both;
+    }
+    .avatar{width:120px; height:auto; border-radius:12px; object-fit:contain; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.15)}
+    h1,h2{margin:0}
+    .title h1{font-size:clamp(2rem, 3.8vw, 2.6rem); line-height:1.2; letter-spacing:0; font-weight:700}
+    .role{margin-top:6px; color:var(--muted); font-weight:600}
+    .affiliation{margin-top:4px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:14px;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .badge:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(17,60,110,.12); text-decoration:none}
+    .badge svg{width:16px; height:16px}
+    .section{
+      margin-top:24px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 4px 18px rgba(17,44,80,.06);
+      animation:rise .55s ease both;
+    }
+    .section h2{font-size:1.45rem; font-weight:700; margin-bottom:10px; color:#14385f}
+    .section h3{font-size:1.08rem; font-weight:700; margin:0 0 8px; color:#14385f}
+    .prose{margin:0}
+    .list{list-style:none; padding:0; margin:0}
+    .list .item{padding:9px 0; border-bottom:1px dashed var(--border); break-inside:avoid}
+    .pub-title{font-weight:700}
+    .pub-venue{font-style:italic}
+    .hl-line{margin-top:5px}
+    .hl{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:var(--accent); color:#fff}
+    .small{font-size:14px; color:var(--muted)}
+    .pub-subsection{margin-top:16px}
+    .pub-subsection:first-child{margin-top:0}
+    .pub-intro{margin-bottom:10px; color:var(--muted)}
+    .topic-pub + .topic-pub{margin-top:10px}
+    .topic-pub{scroll-margin-top:18px}
+    .topic-full-link{float:right; color:var(--muted); font-size:13px; font-weight:600}
+    .topic-full-link:hover{color:var(--link)}
+    .featured-list{display:grid; gap:14px}
+    .featured-item{
+      display:grid;
+      grid-template-columns:234px minmax(0,1fr);
+      gap:16px;
+      align-items:start;
+      padding:12px 0;
+      border-bottom:1px dashed var(--border);
+    }
+    .featured-item:last-child{border-bottom:0}
+    .featured-image-frame{
+      width:234px;
+      aspect-ratio:16/9;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:0;
+      appearance:none;
+      cursor:zoom-in;
+    }
+    .featured-image-frame:hover{border-color:var(--accent); box-shadow:0 6px 18px rgba(16,106,216,.16)}
+    .featured-image{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .featured-copy .item{padding:0; border-bottom:0}
+    .featured-summary{margin-top:8px; color:#334155; font-size:14px; line-height:1.55}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .chip{background:var(--accent-soft); border:1px solid #bdd8ff; color:#12488a; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.02em}
+    .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg,#fff,#f3f8ff);
+      padding:8px 12px;
+      border-radius:12px;
+      font-weight:600;
+    }
+    .btn:hover{text-decoration:none; filter:brightness(.98)}
+    .image-modal[hidden]{display:none}
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(9,20,35,.78);
+    }
+    .image-modal img{
+      max-width:min(1120px,96vw);
+      max-height:88vh;
+      object-fit:contain;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+    }
+    .image-modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:40px;
+      height:40px;
+      border:1px solid rgba(255,255,255,.45);
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:#0f1b2a;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+    }
+    body.modal-open{overflow:hidden}
+    details.pub{padding:12px; border:1px solid var(--border); border-radius:14px; background:#fdfefe}
+    details.pub + details.pub{margin-top:10px}
+    summary{cursor:pointer; font-weight:700; color:#0f3058}
+    .two-col{columns:1; column-gap:26px}
+    @media(min-width:940px){.two-col{columns:2}}
+    #services .list.responsive-cols,#honors .list.responsive-cols{column-gap:28px}
+    @media (min-width: 940px){#services .list.responsive-cols,#honors .list.responsive-cols{columns:2}}
+    #services .list.responsive-cols li,#honors .list.responsive-cols li{break-inside:avoid; overflow-wrap:anywhere; word-break:break-word}
+    footer{color:var(--muted)}
+    @media(max-width:760px){
+      .hero{grid-template-columns:1fr; text-align:left}
+      .avatar{width:120px}
+      .toolbar{flex-direction:column; align-items:flex-start}
+      .featured-item{grid-template-columns:1fr; gap:10px}
+      .featured-image-frame{width:100%; max-width:468px}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hero,.section{animation:none}
+      .badge{transition:none}
+    }
+    @keyframes rise{
+      from{opacity:0; transform:translateY(8px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+    @media print{
+      body{background:#fff}
+      .section,.hero{box-shadow:none}
+      a{text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    
+    
+
+    <section class="section" id="publications">
+      
+      <div class="pub-subsection datasets-pubs">
+  <div class="toolbar" style="justify-content:space-between">
+    <h2>Datasets</h2>
+    <a class="btn" href="index.html#datasets">Selected Publications</a>
+  </div>
+  <p class="prose pub-intro">Datasets, benchmarks, and resources developed through the research publications.</p>
+  <div class="featured-list">
+    <div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for How Do Multimodal Large Language Models Handle Complex Multimodal Reasoning? Placing Them in An Extensible Escape Game" data-full-image="images/datasets/EscapeCraft.png" data-image-alt="Preview for How Do Multimodal Large Language Models Handle Complex Multimodal Reasoning? Placing Them in An Extensible Escape Game">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/EscapeCraft.png" alt="Preview for How Do Multimodal Large Language Models Handle Complex Multimodal Reasoning? Placing Them in An Extensible Escape Game" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">How Do Multimodal Large Language Models Handle Complex Multimodal Reasoning? Placing Them in An Extensible Escape Game</div>
+  <div class="small">Ziyue Wang, Yurui Dong, Fuwen Luo, Minyuan Ruan, Zhili Cheng, Chi Chen, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">ICCV 2025</span>, 4807-4817. [<a href="https://openaccess.thecvf.com/content/ICCV2025/html/Wang_How_Do_Multimodal_Large_Language_Models_Handle_Complex_Multimodal_Reasoning_ICCV_2025_paper.html">pdf</a>] [<a href="https://arxiv.org/abs/2503.10042">arXiv</a>] [<a href="https://github.com/THUNLP-MT/EscapeCraft">code</a>] [<a href="talks/MM-Escape-en.pdf">Slides</a>] [<a href="videos/MM-Escape.mp4">Video</a>] [<a href="https://x.com/Tsinghua_Uni/status/1960372139967516889">Media 1</a>] [<a href="https://www.facebook.com/Tsinghua/posts/pfbid0tEaC28Bu7ZtK1YijcbKx8YBFqS8TWtUDMLDkUnRpVjQ4ZuZV8x1s1NQ79yFkY8j9l?rdid=NlLe9tMS5wmyBLYR#">Media 2</a>] [<a href="talks/MM-Escape-en-ICCVPoster.pdf">Poster</a>]</div>
+  
+</div>
+    <div class="featured-summary">Turns complex multimodal reasoning into an extensible <strong>escape-game</strong> setting, making it clear whether MLLMs can combine clues rather than recognize isolated images.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for Evaluating Time Awareness and Cross-modal Active Perception of Large Models via 4D Escape Room Task" data-full-image="images/datasets/EscapeCraft-4D.png" data-image-alt="Preview for Evaluating Time Awareness and Cross-modal Active Perception of Large Models via 4D Escape Room Task">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/EscapeCraft-4D.png" alt="Preview for Evaluating Time Awareness and Cross-modal Active Perception of Large Models via 4D Escape Room Task" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">Evaluating Time Awareness and Cross-modal Active Perception of Large Models via 4D Escape Room Task</div>
+  <div class="small">Yurui Dong, Ziyue Wang, Shuyun Lu, Dairu Liu, Xuechen Liu, Fuwen Luo, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">Preprint</span>. [<a href="https://arxiv.org/abs/2603.15467">arXiv</a>] [<a href="https://github.com/THUNLP-MT/EscapeCraft-4D">code</a>]</div>
+  
+</div>
+    <div class="featured-summary">Extends escape-room evaluation into <strong>4D time-aware interaction</strong>, testing whether large models can actively gather cross-modal evidence as scenes change over time.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for StreamingBench: Assessing the Gap for MLLMs to Achieve Streaming Video Understanding" data-full-image="images/datasets/StreamingBench.png" data-image-alt="Preview for StreamingBench: Assessing the Gap for MLLMs to Achieve Streaming Video Understanding">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/StreamingBench.png" alt="Preview for StreamingBench: Assessing the Gap for MLLMs to Achieve Streaming Video Understanding" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">StreamingBench: Assessing the Gap for MLLMs to Achieve Streaming Video Understanding</div>
+  <div class="small">Junming Lin, Zheng Fang, Chi Chen, Haoxuan Cheng, Zihao Wan, Fuwen Luo, Ziyue Wang, <strong>Peng Li</strong>, Yang Liu, Maosong Sun. <span class="pub-venue">ICASSP 2026</span>, 12147-12151. [<a href="https://ieeexplore.ieee.org/abstract/document/11463959">pdf</a>] [<a href="https://arxiv.org/abs/2411.03628">arXiv</a>] [<a href="https://github.com/THUNLP-MT/StreamingBench">code</a>] [<a href="https://streamingbench.github.io/">Project Webpage</a>]</div>
+  
+</div>
+    <div class="featured-summary">Targets real streaming video use cases by evaluating <strong>online video understanding</strong>, where models must reason from incomplete, continuously arriving visual information.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models" data-full-image="images/datasets/CODIS.png" data-image-alt="Preview for CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/CODIS.png" alt="Preview for CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models</div>
+  <div class="small">Fuwen Luo, Chi Chen, Zihao Wan, Zhaolu Kang, Qidong Yan, Yingjie Li, Xiaolong Wang, Siyu Wang, Ziyue Wang, Xiaoyue Mi, <strong>Peng Li</strong>, Ning Ma, Maosong Sun, Yang Liu. <span class="pub-venue">ACL 2024</span>, 10639-10659. [<a href="https://aclanthology.org/2024.acl-long.573.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2402.13607">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CODIS">code</a>] [<a href="https://thunlp-mt.github.io/CODIS">Project Webpage</a>]</div>
+  
+</div>
+    <div class="featured-summary">Focuses on <strong>context-dependent visual comprehension</strong>, exposing whether MLLMs can use surrounding context to resolve what an image actually means.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for MUCAR: Benchmarking Multilingual Cross-Modal Ambiguity Resolution for Multimodal Large Language Models" data-full-image="images/datasets/MUCAR.png" data-image-alt="Preview for MUCAR: Benchmarking Multilingual Cross-Modal Ambiguity Resolution for Multimodal Large Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/MUCAR.png" alt="Preview for MUCAR: Benchmarking Multilingual Cross-Modal Ambiguity Resolution for Multimodal Large Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">MUCAR: Benchmarking Multilingual Cross-Modal Ambiguity Resolution for Multimodal Large Language Models</div>
+  <div class="small">Xiaolong Wang, Zhaolu Kang, Wangyuxuan Zhai, Xinyue Lou, Yunghwei Lai, Ziyue Wang, Yawen Wang, Kaiyu Huang, Yile Wang, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">EMNLP 2025</span>, 15037-15059. [<a href="https://aclanthology.org/2025.emnlp-main.760/">pdf</a>] [<a href="https://arxiv.org/abs/2506.17046">arXiv</a>]</div>
+  
+</div>
+    <div class="featured-summary">Broadens multimodal evaluation to <strong>multilingual ambiguity</strong>, testing whether MLLMs can resolve meaning when both language and vision leave room for interpretation.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for ActiView: Evaluating Active Perception Ability for Multimodal Large Language Models" data-full-image="images/datasets/ActiView.png" data-image-alt="Preview for ActiView: Evaluating Active Perception Ability for Multimodal Large Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/ActiView.png" alt="Preview for ActiView: Evaluating Active Perception Ability for Multimodal Large Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">ActiView: Evaluating Active Perception Ability for Multimodal Large Language Models</div>
+  <div class="small">Ziyue Wang, Chi Chen, Fuwen Luo, Yurui Dong, Yuanchi Zhang, Yuzhuang Xu, Xiaolong Wang, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">ACL 2025</span>, 7605-7633. [<a href="https://aclanthology.org/2025.acl-long.376.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2410.04659">arXiv</a>] [<a href="https://github.com/THUNLP-MT/ActiView">code</a>]</div>
+  
+</div>
+    <div class="featured-summary">Tests <strong>active perception</strong>: whether MLLMs know when to seek additional views instead of making brittle guesses from a single observation.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for CoSpace: Benchmarking Continuous Space Perception Ability for Vision-Language Models" data-full-image="images/datasets/CoSpace.png" data-image-alt="Preview for CoSpace: Benchmarking Continuous Space Perception Ability for Vision-Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/CoSpace.png" alt="Preview for CoSpace: Benchmarking Continuous Space Perception Ability for Vision-Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">CoSpace: Benchmarking Continuous Space Perception Ability for Vision-Language Models</div>
+  <div class="small">Yiqi Zhu, Ziyue Wang, Can Zhang, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">CVPR 2025</span>, 29569-29579. [<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_CoSpace_Benchmarking_Continuous_Space_Perception_Ability_for_Vision-Language_Models_CVPR_2025_paper.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2503.14161">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CoSpace">code</a>] [<a href="https://thunlp-mt.github.io/CoSpace/">Project Webpage</a>]</div>
+  
+</div>
+    <div class="featured-summary">Measures continuous-space perception for vision-language models, turning spatial understanding from a qualitative impression into a structured benchmark.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for EgoThink: Evaluating First-Person Perspective Thinking Capability of Vision-Language Models" data-full-image="images/datasets/EgoThink.png" data-image-alt="Preview for EgoThink: Evaluating First-Person Perspective Thinking Capability of Vision-Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/EgoThink.png" alt="Preview for EgoThink: Evaluating First-Person Perspective Thinking Capability of Vision-Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">EgoThink: Evaluating First-Person Perspective Thinking Capability of Vision-Language Models</div>
+  <div class="small">Sijie Cheng, Zhicheng Guo, Jingwen Wu, Kechen Fang, <strong>Peng Li</strong>, Huaping Liu, Yang Liu. <span class="pub-venue">CVPR 2024</span>, 14291-14302. [<a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Cheng_EgoThink_Evaluating_First-Person_Perspective_Thinking_Capability_of_Vision-Language_Models_CVPR_2024_paper.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2311.15596">arXiv</a>] [<a href="https://github.com/AdaCheng/EgoThink">code</a>] [<a href="https://adacheng.github.io/EgoThink/">Project Webpage</a>]</div>
+  <div class="hl-line"><span class="hl">CVPR 2025 Highlight</span></div>
+</div>
+    <div class="featured-summary">Evaluates first-person perspective thinking, asking whether models can reason from an embodied viewer&#x27;s point of view rather than an outside observer&#x27;s.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for StableToolBench: Towards Stable Large-Scale Benchmarking on Tool Learning of Large Language Models" data-full-image="images/datasets/StableToolBench.png" data-image-alt="Preview for StableToolBench: Towards Stable Large-Scale Benchmarking on Tool Learning of Large Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/StableToolBench.png" alt="Preview for StableToolBench: Towards Stable Large-Scale Benchmarking on Tool Learning of Large Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">StableToolBench: Towards Stable Large-Scale Benchmarking on Tool Learning of Large Language Models</div>
+  <div class="small">Zhicheng Guo, Sijie Cheng, Hao Wang, Shihao Liang, Yujia Qin, <strong>Peng Li</strong>, Zhiyuan Liu, Maosong Sun, Yang Liu. <span class="pub-venue">Findings of ACL 2024</span>, 11143-11156. [<a href="https://aclanthology.org/2024.findings-acl.664.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2403.07714">arXiv</a>] [<a href="https://github.com/THUNLP-MT/StableToolBench">code</a>] [<a href="https://zhichengg.github.io/stb.github.io/">Project Webpage</a>]</div>
+  
+</div>
+    <div class="featured-summary">Makes tool-learning evaluation more reliable through <strong>stable, large-scale benchmarking</strong>, reducing noise from changing tools and environments.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for DongbaMIE: A Multimodal Information Extraction Dataset for Evaluating Semantic Understanding of Dongba Pictograms" data-full-image="images/datasets/DongbaMIE.png" data-image-alt="Preview for DongbaMIE: A Multimodal Information Extraction Dataset for Evaluating Semantic Understanding of Dongba Pictograms">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/DongbaMIE.png" alt="Preview for DongbaMIE: A Multimodal Information Extraction Dataset for Evaluating Semantic Understanding of Dongba Pictograms" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">DongbaMIE: A Multimodal Information Extraction Dataset for Evaluating Semantic Understanding of Dongba Pictograms</div>
+  <div class="small">Xiaojun Bi, Shuo Li, Junyao Xing, Ziyue Wang, Fuwen Luo, Weizheng Qiao, Lu Han, Ziwei Sun, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">Findings of EMNLP 2025</span>, 976-990. [<a href="https://aclanthology.org/2025.findings-emnlp.51/">pdf</a>] [<a href="https://arxiv.org/abs/2503.03644">arXiv</a>] [<a href="https://github.com/thinklis/DongbaMIE">code</a>] [<a href="https://huggingface.co/datasets/thinklis/DongbaMIE">Dataset</a>]</div>
+  
+</div>
+    <div class="featured-summary">Builds a multimodal information extraction dataset for <strong>Dongba pictograms</strong>, supporting semantic understanding of a culturally distinctive writing system.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for PATIMT-Bench: A Multi-Scenario Benchmark for Position-Aware Text Image Machine Translation in Large Vision-Language Models" data-full-image="images/datasets/PATIMT_Bench.png" data-image-alt="Preview for PATIMT-Bench: A Multi-Scenario Benchmark for Position-Aware Text Image Machine Translation in Large Vision-Language Models">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/PATIMT_Bench.png" alt="Preview for PATIMT-Bench: A Multi-Scenario Benchmark for Position-Aware Text Image Machine Translation in Large Vision-Language Models" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">PATIMT-Bench: A Multi-Scenario Benchmark for Position-Aware Text Image Machine Translation in Large Vision-Language Models</div>
+  <div class="small">Wanru Zhuang, Wenbo Li, Zhibin Lan, Xu Han, <strong>Peng Li</strong>, Jinsong Su. <span class="pub-venue">Findings of EMNLP 2025</span>, 16572-16588. [<a href="https://aclanthology.org/2025.findings-emnlp.900/">pdf</a>]</div>
+  
+</div>
+    <div class="featured-summary">Highlights a practical translation gap by testing whether vision-language models understand <strong>where text appears</strong> in an image, not just what it says.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for Bench4Merge: A Comprehensive Benchmark for Merging in Realistic Dense Traffic with Micro-Interactive Vehicles" data-full-image="images/datasets/Bench4Merge.png" data-image-alt="Preview for Bench4Merge: A Comprehensive Benchmark for Merging in Realistic Dense Traffic with Micro-Interactive Vehicles">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/Bench4Merge.png" alt="Preview for Bench4Merge: A Comprehensive Benchmark for Merging in Realistic Dense Traffic with Micro-Interactive Vehicles" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">Bench4Merge: A Comprehensive Benchmark for Merging in Realistic Dense Traffic with Micro-Interactive Vehicles</div>
+  <div class="small">Zhengming Wang, Junli Wang, Pengfei Li, Zhaohan Li, Chunyang Liu, Bo Zhang, <strong>Peng Li</strong>, Yilun Chen. <span class="pub-venue">IROS 2025</span>, 8910-8917. [<a href="https://ieeexplore.ieee.org/document/11247075">pdf</a>] [<a href="https://arxiv.org/abs/2410.15912">arXiv</a>] [<a href="https://github.com/WZM5853/Bench4Merge">code</a>] [<a href="videos/Bench4Merge.mp4">Video</a>]</div>
+  
+</div>
+    <div class="featured-summary">Creates realistic dense-traffic merge scenarios with micro-interactive vehicles, pushing autonomous-driving evaluation closer to difficult everyday decisions.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for DocRED: A Large-Scale Document-Level Relation Extraction Dataset" data-full-image="images/datasets/DocRED.png" data-image-alt="Preview for DocRED: A Large-Scale Document-Level Relation Extraction Dataset">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/DocRED.png" alt="Preview for DocRED: A Large-Scale Document-Level Relation Extraction Dataset" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">DocRED: A Large-Scale Document-Level Relation Extraction Dataset</div>
+  <div class="small">Yuan Yao, Deming Ye, <strong>Peng Li</strong>, Xu Han, Yankai Lin, Zhenghao Liu, Zhiyuan Liu, Lixin Huang, Jie Zhou, Maosong Sun. <span class="pub-venue">ACL 2019</span>, 764-777. [<a href="https://aclanthology.org/P19-1074.pdf">pdf</a>] [<a href="https://github.com/thunlp/DocRED">code &amp; data</a>] [<a href="https://competitions.codalab.org/competitions/20147">Leaderboard</a>]</div>
+  
+</div>
+    <div class="featured-summary">Established large-scale <strong>document-level relation extraction</strong>, requiring models to connect evidence across an entire document rather than a single sentence.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for CodRED: A Cross-Document Relation Extraction Dataset for Acquiring Knowledge in the Wild" data-full-image="images/datasets/CodRED.png" data-image-alt="Preview for CodRED: A Cross-Document Relation Extraction Dataset for Acquiring Knowledge in the Wild">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/CodRED.png" alt="Preview for CodRED: A Cross-Document Relation Extraction Dataset for Acquiring Knowledge in the Wild" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">CodRED: A Cross-Document Relation Extraction Dataset for Acquiring Knowledge in the Wild</div>
+  <div class="small">Yuan Yao, Jiaju Du, Yankai Lin, <strong>Peng Li</strong>, Zhiyuan Liu, Jie Zhou, Maosong Sun. <span class="pub-venue">EMNLP 2021</span>, 4452-4472. [<a href="https://aclanthology.org/2021.emnlp-main.366.pdf">pdf</a>] [<a href="https://github.com/thunlp/CodRED">code &amp; data</a>] [<a href="https://codalab.lisn.upsaclay.fr/competitions/3770">Leaderboard</a>]</div>
+  
+</div>
+    <div class="featured-summary">Moves relation extraction into the wild by requiring evidence across documents, closer to how knowledge is acquired from real web corpora.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for MAVEN: A Massive General Domain Event Detection Dataset" data-full-image="images/datasets/MAVEN.png" data-image-alt="Preview for MAVEN: A Massive General Domain Event Detection Dataset">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/MAVEN.png" alt="Preview for MAVEN: A Massive General Domain Event Detection Dataset" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">MAVEN: A Massive General Domain Event Detection Dataset</div>
+  <div class="small">Xiaozhi Wang, Ziqi Wang, Xu Han, Wangyi Jiang, Rong Han, Zhiyuan Liu, Juanzi Li, <strong>Peng Li</strong>, Yankai Lin, Jie Zhou. <span class="pub-venue">EMNLP 2020</span>, 1652–1671. [<a href="https://www.aclweb.org/anthology/2020.emnlp-main.129.pdf">pdf</a>] [<a href="https://github.com/THU-KEG/MAVEN-dataset">code</a>]</div>
+  
+</div>
+    <div class="featured-summary">Provides a massive general-domain event detection resource, making event understanding broader and more representative of real text.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for MAVEN-ERE: A Unified Large-scale Dataset for Event Coreference, Temporal, Causal and Subevent Relation Extraction" data-full-image="images/datasets/MAVEN_ERE.png" data-image-alt="Preview for MAVEN-ERE: A Unified Large-scale Dataset for Event Coreference, Temporal, Causal and Subevent Relation Extraction">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/MAVEN_ERE.png" alt="Preview for MAVEN-ERE: A Unified Large-scale Dataset for Event Coreference, Temporal, Causal and Subevent Relation Extraction" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">MAVEN-ERE: A Unified Large-scale Dataset for Event Coreference, Temporal, Causal and Subevent Relation Extraction</div>
+  <div class="small">Xiaozhi Wang, Yulin Chen, Ning Ding, Hao Peng, Zimu Wang, Yankai Lin, Xu Han, Lei Hou, Juanzi Li, Zhiyuan Liu, <strong>Peng Li</strong>, Jie Zhou. <span class="pub-venue">EMNLP 2022</span>, 926-941. [<a href="https://aclanthology.org/2022.emnlp-main.60.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2211.07342">arXiv</a>] [<a href="https://github.com/THU-KEG/MAVEN-ERE">code</a>]</div>
+  
+</div>
+    <div class="featured-summary">Unifies event coreference, temporal, causal, and subevent relations, supporting richer event reasoning beyond simply detecting that an event occurred.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for MOOCCubeX: A Large Knowledge-centered Repository for Adaptive Learning in MOOCs" data-full-image="images/datasets/MOOCCubeX.png" data-image-alt="Preview for MOOCCubeX: A Large Knowledge-centered Repository for Adaptive Learning in MOOCs">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/MOOCCubeX.png" alt="Preview for MOOCCubeX: A Large Knowledge-centered Repository for Adaptive Learning in MOOCs" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">MOOCCubeX: A Large Knowledge-centered Repository for Adaptive Learning in MOOCs</div>
+  <div class="small">Jifan Yu, Yuquan Wang, Qingyang Zhong, Gan Luo, Yiming Mao, Kai Sun, Wenzheng Feng, Wei Xu, Shulin Cao, Kaisheng Zeng, Zijun Yao, Lei Hou, Yankai Lin, <strong>Peng Li</strong>, Jie Zhou, Bin Xu, Juanzi Li, Jie Tang, Maosong Sun. <span class="pub-venue">CIKM 2021</span>, 4643-4652. [<a href="https://dl.acm.org/doi/pdf/10.1145/3459637.3482010">pdf</a>] [<a href="https://github.com/THU-KEG/MOOCCubeX">code</a>]</div>
+  <div class="hl-line"><span class="hl">CIKM 2021 Best Resource Paper Nomination</span></div>
+</div>
+    <div class="featured-summary">Builds a knowledge-centered MOOC repository for adaptive learning, connecting courses, concepts, exercises, and learners at large scale.</div>
+  </div>
+</div><div class="featured-item">
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for FewRel 2.0: Towards More Challenging Few-Shot Relation Classification" data-full-image="images/datasets/FewRel_2_0.png" data-image-alt="Preview for FewRel 2.0: Towards More Challenging Few-Shot Relation Classification">
+    <img class="featured-image" src="images/generated/thumbs-700w/datasets/FewRel_2_0.png" alt="Preview for FewRel 2.0: Towards More Challenging Few-Shot Relation Classification" loading="lazy" />
+  </button>
+  <div class="featured-copy">
+    <div class="item">
+  <div class="pub-title">FewRel 2.0: Towards More Challenging Few-Shot Relation Classification</div>
+  <div class="small">Tianyu Gao, Xu Han, Hao Zhu, Zhiyuan Liu, <strong>Peng Li</strong>, Maosong Sun, Jie Zhou. <span class="pub-venue">EMNLP 2019</span>, 6250–6255. [<a href="https://www.aclweb.org/anthology/D19-1649.pdf">pdf</a>] [<a href="https://github.com/thunlp/FewRel">code</a>] [<a href="https://thunlp.github.io/fewrel.html">benchmark</a>]</div>
+  
+</div>
+    <div class="featured-summary">Raises the bar for few-shot relation classification with harder settings that better test whether models can adapt from limited examples.</div>
+  </div>
+</div>
+  </div>
+  
+</div>
+    </section>
+    
+    
+
+    <footer class="section">
+      <div class="small">Last updated: <span id="lastUpdated">Jun 18, 2026</span></div>
+    </footer>
+  </div>
+
+  <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close image preview">&times;</button>
+    <img id="image-modal-img" alt="" />
+  </div>
+
+  <script>
+    // Obfuscated email to reduce scraping
+    const emailUser = 'pengli09';
+    const emailDomain = 'gmail.com';
+    const emailLink = document.getElementById('email-link');
+    if (emailLink) {
+      emailLink.href = `mailto:${emailUser}@${emailDomain}`;
+      emailLink.title = `${emailUser} at ${emailDomain}`;
+    }
+
+    const imageModal = document.getElementById('image-modal');
+    const imageModalImg = document.getElementById('image-modal-img');
+    const imageModalClose = imageModal ? imageModal.querySelector('.image-modal-close') : null;
+    function closeImageModal() {
+      if (!imageModal || !imageModalImg) return;
+      imageModal.hidden = true;
+      imageModalImg.removeAttribute('src');
+      imageModalImg.alt = '';
+      document.body.classList.remove('modal-open');
+    }
+    document.querySelectorAll('.image-zoom-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (!imageModal || !imageModalImg) return;
+        const fullImage = trigger.dataset.fullImage;
+        if (!fullImage) return;
+        imageModalImg.src = fullImage;
+        imageModalImg.alt = trigger.dataset.imageAlt || '';
+        imageModal.hidden = false;
+        document.body.classList.add('modal-open');
+        if (imageModalClose) imageModalClose.focus({preventScroll: true});
+      });
+    });
+    if (imageModal) {
+      imageModal.addEventListener('click', (event) => {
+        if (event.target === imageModal) closeImageModal();
+      });
+    }
+    if (imageModalClose) {
+      imageModalClose.addEventListener('click', closeImageModal);
+    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeImageModal();
+    });
+  </script>
+</body>
+</html>

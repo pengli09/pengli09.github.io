@@ -96,6 +96,9 @@
     .pub-subsection:first-child{margin-top:0}
     .pub-intro{margin-bottom:10px; color:var(--muted)}
     .topic-pub + .topic-pub{margin-top:10px}
+    .topic-pub{scroll-margin-top:18px}
+    .topic-full-link{float:right; color:var(--muted); font-size:13px; font-weight:600}
+    .topic-full-link:hover{color:var(--link)}
     .featured-list{display:grid; gap:14px}
     .featured-item{
       display:grid;
@@ -116,7 +119,11 @@
       align-items:center;
       justify-content:center;
       overflow:hidden;
+      padding:0;
+      appearance:none;
+      cursor:zoom-in;
     }
+    .featured-image-frame:hover{border-color:var(--accent); box-shadow:0 6px 18px rgba(16,106,216,.16)}
     .featured-image{
       width:100%;
       height:100%;
@@ -139,6 +146,40 @@
       font-weight:600;
     }
     .btn:hover{text-decoration:none; filter:brightness(.98)}
+    .image-modal[hidden]{display:none}
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(9,20,35,.78);
+    }
+    .image-modal img{
+      max-width:min(1120px,96vw);
+      max-height:88vh;
+      object-fit:contain;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+    }
+    .image-modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:40px;
+      height:40px;
+      border:1px solid rgba(255,255,255,.45);
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:#0f1b2a;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+    }
+    body.modal-open{overflow:hidden}
     details.pub{padding:12px; border:1px solid var(--border); border-radius:14px; background:#fdfefe}
     details.pub + details.pub{margin-top:10px}
     summary{cursor:pointer; font-weight:700; color:#0f3058}
@@ -923,8 +964,13 @@
     
 
     <footer class="section">
-      <div class="small">Last updated: <span id="lastUpdated">Jun 17, 2026</span></div>
+      <div class="small">Last updated: <span id="lastUpdated">Jun 18, 2026</span></div>
     </footer>
+  </div>
+
+  <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close image preview">&times;</button>
+    <img id="image-modal-img" alt="" />
   </div>
 
   <script>
@@ -936,6 +982,40 @@
       emailLink.href = `mailto:${emailUser}@${emailDomain}`;
       emailLink.title = `${emailUser} at ${emailDomain}`;
     }
+
+    const imageModal = document.getElementById('image-modal');
+    const imageModalImg = document.getElementById('image-modal-img');
+    const imageModalClose = imageModal ? imageModal.querySelector('.image-modal-close') : null;
+    function closeImageModal() {
+      if (!imageModal || !imageModalImg) return;
+      imageModal.hidden = true;
+      imageModalImg.removeAttribute('src');
+      imageModalImg.alt = '';
+      document.body.classList.remove('modal-open');
+    }
+    document.querySelectorAll('.image-zoom-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (!imageModal || !imageModalImg) return;
+        const fullImage = trigger.dataset.fullImage;
+        if (!fullImage) return;
+        imageModalImg.src = fullImage;
+        imageModalImg.alt = trigger.dataset.imageAlt || '';
+        imageModal.hidden = false;
+        document.body.classList.add('modal-open');
+        if (imageModalClose) imageModalClose.focus({preventScroll: true});
+      });
+    });
+    if (imageModal) {
+      imageModal.addEventListener('click', (event) => {
+        if (event.target === imageModal) closeImageModal();
+      });
+    }
+    if (imageModalClose) {
+      imageModalClose.addEventListener('click', closeImageModal);
+    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeImageModal();
+    });
   </script>
 </body>
 </html>

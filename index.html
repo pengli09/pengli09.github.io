@@ -96,6 +96,9 @@
     .pub-subsection:first-child{margin-top:0}
     .pub-intro{margin-bottom:10px; color:var(--muted)}
     .topic-pub + .topic-pub{margin-top:10px}
+    .topic-pub{scroll-margin-top:18px}
+    .topic-full-link{float:right; color:var(--muted); font-size:13px; font-weight:600}
+    .topic-full-link:hover{color:var(--link)}
     .featured-list{display:grid; gap:14px}
     .featured-item{
       display:grid;
@@ -116,7 +119,11 @@
       align-items:center;
       justify-content:center;
       overflow:hidden;
+      padding:0;
+      appearance:none;
+      cursor:zoom-in;
     }
+    .featured-image-frame:hover{border-color:var(--accent); box-shadow:0 6px 18px rgba(16,106,216,.16)}
     .featured-image{
       width:100%;
       height:100%;
@@ -139,6 +146,40 @@
       font-weight:600;
     }
     .btn:hover{text-decoration:none; filter:brightness(.98)}
+    .image-modal[hidden]{display:none}
+    .image-modal{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(9,20,35,.78);
+    }
+    .image-modal img{
+      max-width:min(1120px,96vw);
+      max-height:88vh;
+      object-fit:contain;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+    }
+    .image-modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:40px;
+      height:40px;
+      border:1px solid rgba(255,255,255,.45);
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:#0f1b2a;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+    }
+    body.modal-open{overflow:hidden}
     details.pub{padding:12px; border:1px solid var(--border); border-radius:14px; background:#fdfefe}
     details.pub + details.pub{margin-top:10px}
     summary{cursor:pointer; font-weight:700; color:#0f3058}
@@ -224,9 +265,9 @@
   <p class="prose pub-intro">My current research focuses on AI4Math, AI Scientist, and LLM agents, with broader interests in reasoning and multimodal intelligence.</p>
   <div class="featured-list">
     <div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/AIM.png" alt="Preview for AI Mathematician: Towards Fully Automated Frontier Mathematical Research" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for AI Mathematician: Towards Fully Automated Frontier Mathematical Research" data-full-image="images/featured/AIM.png" data-image-alt="Preview for AI Mathematician: Towards Fully Automated Frontier Mathematical Research">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/AIM.png" alt="Preview for AI Mathematician: Towards Fully Automated Frontier Mathematical Research" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">AI Mathematician: Towards Fully Automated Frontier Mathematical Research</div>
@@ -236,9 +277,9 @@
     <div class="featured-summary">Shows how <strong>AI Mathematician</strong> can help tackle real research problems, moving AI for math beyond solving benchmark puzzles toward assisting frontier mathematical discovery.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/Homogenization.Theory.png" alt="Preview for AI Mathematician as a Partner in Advancing Mathematical Discovery - A Case Study in Homogenization Theory" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for AI Mathematician as a Partner in Advancing Mathematical Discovery - A Case Study in Homogenization Theory" data-full-image="images/featured/Homogenization.Theory.png" data-image-alt="Preview for AI Mathematician as a Partner in Advancing Mathematical Discovery - A Case Study in Homogenization Theory">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/Homogenization.Theory.png" alt="Preview for AI Mathematician as a Partner in Advancing Mathematical Discovery - A Case Study in Homogenization Theory" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">AI Mathematician as a Partner in Advancing Mathematical Discovery - A Case Study in Homogenization Theory</div>
@@ -248,9 +289,9 @@
     <div class="featured-summary">A concrete case study showing AI as a <strong>research partner</strong> for mathematicians: it helps explore proof ideas while experts keep the final reasoning rigorous and trustworthy.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/pverify.png" alt="Preview for Pessimistic Verification for Open Ended Math Questions" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for Pessimistic Verification for Open Ended Math Questions" data-full-image="images/featured/pverify.png" data-image-alt="Preview for Pessimistic Verification for Open Ended Math Questions">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/pverify.png" alt="Preview for Pessimistic Verification for Open Ended Math Questions" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">Pessimistic Verification for Open Ended Math Questions</div>
@@ -260,9 +301,9 @@
     <div class="featured-summary">Addresses a key obstacle for AI-assisted math: not just producing proofs, but <strong>reliably catching mistakes</strong> in open-ended mathematical reasoning.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/FormaRL.png" alt="Preview for FormaRL: Enhancing Autoformalization with no Labeled Data" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for FormaRL: Enhancing Autoformalization with no Labeled Data" data-full-image="images/featured/FormaRL.png" data-image-alt="Preview for FormaRL: Enhancing Autoformalization with no Labeled Data">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/FormaRL.png" alt="Preview for FormaRL: Enhancing Autoformalization with no Labeled Data" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">FormaRL: Enhancing Autoformalization with no Labeled Data</div>
@@ -272,9 +313,9 @@
     <div class="featured-summary">Makes formal mathematics more accessible to AI systems by reducing the need for expensive labeled data when translating informal math into machine-checkable proofs.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/AIGS.png" alt="Preview for AIGS: Generating Science from AI-Powered Automated Falsification" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for AIGS: Generating Science from AI-Powered Automated Falsification" data-full-image="images/featured/AIGS.png" data-image-alt="Preview for AIGS: Generating Science from AI-Powered Automated Falsification">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/AIGS.png" alt="Preview for AIGS: Generating Science from AI-Powered Automated Falsification" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">AIGS: Generating Science from AI-Powered Automated Falsification</div>
@@ -284,9 +325,9 @@
     <div class="featured-summary">Explores what it would take for AI to contribute to science by emphasizing <strong>testing and falsification</strong>, so generated ideas are challenged rather than simply accepted.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/UA2.png" alt="Preview for Position: Towards Unified Alignment Between Agents, Humans, and Environment" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for Position: Towards Unified Alignment Between Agents, Humans, and Environment" data-full-image="images/featured/UA2.png" data-image-alt="Preview for Position: Towards Unified Alignment Between Agents, Humans, and Environment">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/UA2.png" alt="Preview for Position: Towards Unified Alignment Between Agents, Humans, and Environment" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">Position: Towards Unified Alignment Between Agents, Humans, and Environment</div>
@@ -296,9 +337,9 @@
     <div class="featured-summary">Broadens AI alignment from following human preferences to building agents that also respect the surrounding environment and practical constraints like time and cost.</div>
   </div>
 </div><div class="featured-item">
-  <div class="featured-image-frame">
-    <img class="featured-image" src="images/featured/DyLAN2.png" alt="Preview for A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration" loading="lazy" />
-  </div>
+  <button class="featured-image-frame image-zoom-trigger" type="button" title="Click to enlarge" aria-label="Enlarge image for A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration" data-full-image="images/featured/DyLAN2.png" data-image-alt="Preview for A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration">
+    <img class="featured-image" src="images/generated/thumbs-700w/featured/DyLAN2.png" alt="Preview for A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration" loading="lazy" />
+  </button>
   <div class="featured-copy">
     <div class="item">
   <div class="pub-title">A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration</div>
@@ -318,7 +359,7 @@
         <a class="btn" href="publications.html">Full Publication List</a>
       </div>
       <div class="pub-subsection topic-pubs">
-  <details class="pub topic-pub" open>
+  <details class="pub topic-pub" id="ai4math-and-ai-scientist" open>
   <summary>AI4Math and AI Scientist</summary>
   <div class="two-col">
     <div class="list">
@@ -345,7 +386,7 @@
 </div>
     </div>
   </div>
-</details><details class="pub topic-pub" open>
+</details><details class="pub topic-pub" id="llm-agents" open>
   <summary>LLM Agents</summary>
   <div class="two-col">
     <div class="list">
@@ -376,7 +417,7 @@
 </div>
     </div>
   </div>
-</details><details class="pub topic-pub" open>
+</details><details class="pub topic-pub" id="reasoning-and-learning" open>
   <summary>Reasoning and Learning</summary>
   <div class="two-col">
     <div class="list">
@@ -407,7 +448,7 @@
 </div>
     </div>
   </div>
-</details><details class="pub topic-pub" open>
+</details><details class="pub topic-pub" id="mllms" open>
   <summary>MLLMs</summary>
   <div class="two-col">
     <div class="list">
@@ -438,8 +479,8 @@
 </div>
     </div>
   </div>
-</details><details class="pub topic-pub" open>
-  <summary>Datasets</summary>
+</details><details class="pub topic-pub" id="datasets" open>
+  <summary><span>Datasets</span><a class="topic-full-link" href="datasets.html" onclick="event.stopPropagation()">Full List</a></summary>
   <div class="two-col">
     <div class="list">
       <div class="item">
@@ -455,16 +496,16 @@
   <div class="small">Junming Lin, Zheng Fang, Chi Chen, Haoxuan Cheng, Zihao Wan, Fuwen Luo, Ziyue Wang, <strong>Peng Li</strong>, Yang Liu, Maosong Sun. <span class="pub-venue">ICASSP 2026</span>, 12147-12151. [<a href="https://ieeexplore.ieee.org/abstract/document/11463959">pdf</a>] [<a href="https://arxiv.org/abs/2411.03628">arXiv</a>] [<a href="https://github.com/THUNLP-MT/StreamingBench">code</a>] [<a href="https://streamingbench.github.io/">Project Webpage</a>]</div>
   
 </div><div class="item">
+  <div class="pub-title">CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models</div>
+  <div class="small">Fuwen Luo, Chi Chen, Zihao Wan, Zhaolu Kang, Qidong Yan, Yingjie Li, Xiaolong Wang, Siyu Wang, Ziyue Wang, Xiaoyue Mi, <strong>Peng Li</strong>, Ning Ma, Maosong Sun, Yang Liu. <span class="pub-venue">ACL 2024</span>, 10639-10659. [<a href="https://aclanthology.org/2024.acl-long.573.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2402.13607">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CODIS">code</a>] [<a href="https://thunlp-mt.github.io/CODIS">Project Webpage</a>]</div>
+  
+</div><div class="item">
   <div class="pub-title">ActiView: Evaluating Active Perception Ability for Multimodal Large Language Models</div>
   <div class="small">Ziyue Wang, Chi Chen, Fuwen Luo, Yurui Dong, Yuanchi Zhang, Yuzhuang Xu, Xiaolong Wang, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">ACL 2025</span>, 7605-7633. [<a href="https://aclanthology.org/2025.acl-long.376.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2410.04659">arXiv</a>] [<a href="https://github.com/THUNLP-MT/ActiView">code</a>]</div>
   
 </div><div class="item">
   <div class="pub-title">CoSpace: Benchmarking Continuous Space Perception Ability for Vision-Language Models</div>
   <div class="small">Yiqi Zhu, Ziyue Wang, Can Zhang, <strong>Peng Li</strong>, Yang Liu. <span class="pub-venue">CVPR 2025</span>, 29569-29579. [<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_CoSpace_Benchmarking_Continuous_Space_Perception_Ability_for_Vision-Language_Models_CVPR_2025_paper.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2503.14161">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CoSpace">code</a>] [<a href="https://thunlp-mt.github.io/CoSpace/">Project Webpage</a>]</div>
-  
-</div><div class="item">
-  <div class="pub-title">CODIS: Benchmarking Context-Dependent Visual Comprehension for Multimodal Large Language Models</div>
-  <div class="small">Fuwen Luo, Chi Chen, Zihao Wan, Zhaolu Kang, Qidong Yan, Yingjie Li, Xiaolong Wang, Siyu Wang, Ziyue Wang, Xiaoyue Mi, <strong>Peng Li</strong>, Ning Ma, Maosong Sun, Yang Liu. <span class="pub-venue">ACL 2024</span>, 10639-10659. [<a href="https://aclanthology.org/2024.acl-long.573.pdf">pdf</a>] [<a href="https://arxiv.org/abs/2402.13607">arXiv</a>] [<a href="https://github.com/THUNLP-MT/CODIS">code</a>] [<a href="https://thunlp-mt.github.io/CODIS">Project Webpage</a>]</div>
   
 </div><div class="item">
   <div class="pub-title">StableToolBench: Towards Stable Large-Scale Benchmarking on Tool Learning of Large Language Models</div>
@@ -550,8 +591,13 @@
     </section>
 
     <footer class="section">
-      <div class="small">Last updated: <span id="lastUpdated">Jun 17, 2026</span></div>
+      <div class="small">Last updated: <span id="lastUpdated">Jun 18, 2026</span></div>
     </footer>
+  </div>
+
+  <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <button class="image-modal-close" type="button" aria-label="Close image preview">&times;</button>
+    <img id="image-modal-img" alt="" />
   </div>
 
   <script>
@@ -563,6 +609,40 @@
       emailLink.href = `mailto:${emailUser}@${emailDomain}`;
       emailLink.title = `${emailUser} at ${emailDomain}`;
     }
+
+    const imageModal = document.getElementById('image-modal');
+    const imageModalImg = document.getElementById('image-modal-img');
+    const imageModalClose = imageModal ? imageModal.querySelector('.image-modal-close') : null;
+    function closeImageModal() {
+      if (!imageModal || !imageModalImg) return;
+      imageModal.hidden = true;
+      imageModalImg.removeAttribute('src');
+      imageModalImg.alt = '';
+      document.body.classList.remove('modal-open');
+    }
+    document.querySelectorAll('.image-zoom-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (!imageModal || !imageModalImg) return;
+        const fullImage = trigger.dataset.fullImage;
+        if (!fullImage) return;
+        imageModalImg.src = fullImage;
+        imageModalImg.alt = trigger.dataset.imageAlt || '';
+        imageModal.hidden = false;
+        document.body.classList.add('modal-open');
+        if (imageModalClose) imageModalClose.focus({preventScroll: true});
+      });
+    });
+    if (imageModal) {
+      imageModal.addEventListener('click', (event) => {
+        if (event.target === imageModal) closeImageModal();
+      });
+    }
+    if (imageModalClose) {
+      imageModalClose.addEventListener('click', closeImageModal);
+    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeImageModal();
+    });
   </script>
 </body>
 </html>
