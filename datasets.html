@@ -135,6 +135,9 @@
     .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
     .chip{background:var(--accent-soft); border:1px solid #bdd8ff; color:#12488a; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.02em}
     .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .toolbar-actions{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+    .quiet-link{color:var(--muted); font-size:14px; font-weight:600}
+    .quiet-link:hover{color:var(--link)}
     .btn{
       display:inline-flex;
       align-items:center;
@@ -220,9 +223,12 @@
     <section class="section" id="publications">
       
       <div class="pub-subsection datasets-pubs">
+  <p class="small pub-nav"><a href="index.html">Back to homepage</a></p>
   <div class="toolbar" style="justify-content:space-between">
     <h2>Datasets</h2>
-    <a class="btn" href="index.html#datasets">Selected Publications</a>
+    <div class="toolbar-actions">
+      <a class="btn" href="index.html#datasets">Selected Publications</a>
+    </div>
   </div>
   <p class="prose pub-intro">Datasets, benchmarks, and resources developed through the research publications.</p>
   <div class="featured-list">
