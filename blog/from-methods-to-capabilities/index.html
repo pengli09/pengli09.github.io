@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>从研究方法到模型能力：重看 2022 年以来的工作 — Peng Li</title>
+  <meta name="description" content="综合 2022 年以来的论文，讨论三项值得检验的行为能力与两条训练原则，并用独立研究、反例和适用边界约束判断。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2314385f'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='sans-serif' font-size='30' fill='white'%3EPL%3C/text%3E%3C/svg%3E" />
+  
+  <link rel="stylesheet" href="../../blog/style.css" />
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="Site navigation">
+      <a class="brand" href="../../index.html">Peng Li</a>
+      <div><a href="../../index.html">Home</a><a href="../../blog/" aria-label="Blog index">Blog</a><a href="https://ai-mathematician.net/">AIM Blog</a></div>
+    </nav>
+    <main><article>
+      <header class="article-header">
+        <p class="eyebrow">研究随笔 · Research Notes</p>
+        <h1>从研究方法到模型能力：重看 2022 年以来的工作</h1>
+        <p class="meta"><time datetime="2026-10-03">2026-10-03</time> · 修订于 2026-10-04 · 约 15 分钟</p>
+        <p class="summary">综合 2022 年以来的论文，讨论三项值得检验的行为能力与两条训练原则，并用独立研究、反例和适用边界约束判断。</p>
+      </header>
+      <nav class="toc" aria-label="文章目录"><h2>目录</h2><ol><li class="toc-h2"><a href="#%E4%B8%80-%E6%8A%8A%E4%BF%A1%E6%81%AF%E7%BB%84%E7%BB%87%E6%88%90%E5%8F%AF%E4%BB%A5%E6%93%8D%E4%BD%9C%E5%92%8C%E6%A3%80%E9%AA%8C%E7%9A%84%E5%AF%B9%E8%B1%A1">一、把信息组织成可以操作和检验的对象</a></li><li class="toc-h3"><a href="#%E8%B4%AF%E7%A9%BF%E4%B8%8D%E5%90%8C%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98">贯穿不同任务的问题</a></li><li class="toc-h3"><a href="#%E4%B8%8D%E8%83%BD%E7%94%B1%E6%AD%A4%E6%8E%A8%E5%87%BA-%E6%98%BE%E5%BC%8F%E7%BB%93%E6%9E%84%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD">不能由此推出“显式结构越多越好”</a></li><li class="toc-h2"><a href="#%E4%BA%8C-%E6%8C%89%E5%86%B3%E7%AD%96%E4%BB%B7%E5%80%BC%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF-%E5%B9%B6%E7%BB%84%E7%BB%87%E5%90%8E%E7%BB%AD%E8%A1%8C%E5%8A%A8">二、按决策价值获取信息，并组织后续行动</a></li><li class="toc-h3"><a href="#%E8%A7%82%E5%AF%9F%E6%9C%AC%E8%BA%AB%E9%9C%80%E8%A6%81%E6%88%90%E4%B8%BA%E5%8A%A8%E4%BD%9C">观察本身需要成为动作</a></li><li class="toc-h3"><a href="#%E5%8D%8F%E4%BD%9C%E7%AD%96%E7%95%A5%E5%B7%B2%E6%9C%89%E8%AE%AD%E7%BB%83%E8%AF%81%E6%8D%AE-%E4%BD%86%E4%B8%8D%E8%83%BD%E5%8F%AA%E8%AE%A1%E7%AE%97%E5%8D%8F%E4%BD%9C%E6%94%B6%E7%9B%8A">协作策略已有训练证据，但不能只计算协作收益</a></li><li class="toc-h3"><a href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E8%AE%AD%E7%BB%83%E5%BA%94%E5%A2%9E%E5%8A%A0%E4%BB%80%E4%B9%88">下一步训练应增加什么？</a></li><li class="toc-h2"><a href="#%E4%B8%89-%E4%BD%BF%E8%AF%84%E4%BB%B7%E5%92%8C%E4%BF%AE%E6%AD%A3%E5%AF%B9%E8%AF%81%E6%8D%AE%E8%B4%9F%E8%B4%A3">三、使评价和修正对证据负责</a></li><li class="toc-h2"><a href="#%E5%9B%9B-%E6%AF%94%E6%96%B0%E5%A2%9E%E8%83%BD%E5%8A%9B%E5%90%8D%E7%A7%B0%E6%9B%B4%E7%9B%B4%E6%8E%A5%E7%9A%84%E8%AE%AD%E7%BB%83%E5%90%AF%E5%8F%91">四、比新增能力名称更直接的训练启发</a></li><li class="toc-h3"><a href="#%E5%AD%A6%E4%B9%A0%E4%BB%B7%E5%80%BC%E9%9A%8F%E6%A8%A1%E5%9E%8B%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96">学习价值随模型状态变化</a></li><li class="toc-h3"><a href="#%E5%90%B8%E6%94%B6%E6%96%B0%E8%83%BD%E5%8A%9B%E6%97%B6-%E9%9C%80%E8%A6%81%E6%B5%8B%E9%87%8F%E5%A4%B1%E5%8E%BB%E4%BA%86%E4%BB%80%E4%B9%88">吸收新能力时，需要测量失去了什么</a></li><li class="toc-h2"><a href="#%E4%BA%94-%E5%93%AA%E4%BA%9B%E4%B8%BB%E5%BC%A0%E7%9B%AE%E5%89%8D%E8%BF%98%E4%B8%8D%E5%BA%94%E6%88%90%E7%AB%8B">五、哪些主张目前还不应成立？</a></li><li class="toc-h2"><a href="#%E5%85%AD-%E6%80%8E%E6%A0%B7%E6%8A%8A%E8%BF%99%E4%BA%9B%E5%88%A4%E6%96%AD%E5%8F%98%E6%88%90%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%AE%9E%E9%AA%8C">六、怎样把这些判断变成下一步实验？</a></li></ol></nav>
+      <div class="prose"><p>回看 2022 年以来与合作者开展的研究，我关心的是：当模型规模、训练方法和应用环境已经变化，哪些经验仍值得带入下一阶段的训练？</p>
+<p>重新梳理全部论文后，我认为可以保留三项相互关联的行为能力：<strong>构造可操作的任务表征，按决策价值获取信息与协调行动，依据证据验证和修正结果。</strong> 同样值得保留的，还有两条贯穿这些工作的训练原则：<strong>根据模型当前状态分配学习信号，在吸收新知识时控制对已有能力的干扰。</strong></p>
+<p>这里的“值得保留”是建议开展有针对性的实验。现有结果尚不足以证明，这五点构成完备的能力分类，或相应方法在一线模型上仍有稳定的增量收益。相关方向已经有大量独立研究；本文讨论的价值在于具体的训练对象、失效条件和检验方式。</p>
+<p>这次回顾以主页论文表中 2022 年及以后全部记录为起点：120 条记录，合并 MUSEG 的会议与工作坊版本后为 119 项工作，另补入表中遗漏、已核对作者的 SPEC-RL，共 120 项。年份沿用主页目录，因此包含此前发布预印本、2022 年以后正式发表的工作。截至 2026 年 10 月 4 日，116 项取得可读正文来源并作了不同深度的选读；另有 1 项仅取得出版方摘要、1 项仅取得作者所在机构的介绍、2 项尚缺可读原文。缺失部分不承担下文的核心论证。这是基于完整目录的综合讨论，并非对每篇论文的逐页精读，也不把主页目录视为绝无遗漏的书目全集。</p>
+<h2 id="一-把信息组织成可以操作和检验的对象">一、把信息组织成可以操作和检验的对象</h2>
+<h3 id="贯穿不同任务的问题">贯穿不同任务的问题</h3>
+<p>从早期的实体、跨度和事件关系建模，到区域理解、空间坐标、视频时间定位，再到象形文字的结构分析，一条反复出现的研究线是：模型需要把输入中的对象及其关系组织出来，使后续操作有明确的作用对象。</p>
+<p><a href="https://arxiv.org/abs/2109.06067">PL-Marker（2022）</a> 处理跨度及其关系，<a href="https://arxiv.org/abs/2211.07342">MAVEN-ERE（2022）</a> 联合标注事件共指、时序、因果与子事件关系；<a href="https://arxiv.org/abs/2308.13437">PVIT（2023）</a> 将区域信息纳入视觉语言指令训练。它们并不共同证明一种通用推理能力，却都把“整体上理解了内容”分解成了可以单独检查的对象、位置与关系。</p>
+<p>后续工作的训练对象更具体。<a href="https://arxiv.org/abs/2505.20715">MUSEG</a> 学习把视频中的多个相关片段定位到时间区间；<a href="https://aclanthology.org/2025.findings-emnlp.900/">PATIMT</a> 将翻译与图像中的文字区域关联起来；<a href="https://arxiv.org/abs/2511.00076">象形文字的 Bézier 曲线重建</a> 则将字形转换为可以重新渲染的几何程序。<a href="https://arxiv.org/abs/2601.05508">HieroSA</a> 进一步研究跨文字系统的笔画结构分析。这些任务使回答获得了落点：哪一个对象、哪一段时间、哪些控制点，以及输出能否与输入对应。</p>
+<p>东巴文字研究也有类似启发。<a href="https://arxiv.org/abs/2503.03644">DongbaMIE</a> 区分对象、动作、属性与关系；<a href="https://www.nature.com/articles/s40494-025-02096-w">上下文翻译研究</a> 通过语义单元的重排与空间拼接构造训练样本。它们提示，保留结构和组合关系可能比直接增加整段图像—文本配对更有针对性。但字形重建的迁移，不能直接推成语言语义已经被理解；事件因果关系的抽取，也不等于模型具有干预意义上的因果推理能力。</p>
+<h3 id="不能由此推出-显式结构越多越好">不能由此推出“显式结构越多越好”</h3>
+<p>这条研究线内部就存在约束。<a href="https://arxiv.org/abs/2402.12058">SCAFFOLD</a> 通过坐标提示改善表现；<a href="https://arxiv.org/abs/2401.11725">符号到语言的转换</a> 则说明，把符号换成模型熟悉的语言表达也可能更有效。两者共同支持的是<strong>表征与模型已有知识之间的适配</strong>，尚不能证明显式结构天然优于自然语言，或任务改善必然来自新增的推理能力。</p>
+<p>训练方法也没有统一答案。Bézier 重建的实验中，完整监督微调优于所比较的强化学习方案；MUSEG 则发现，早期鼓励时间戳输出有帮助，持续施加同样的鼓励会带来问题。中间结构应接受任务效用的检验，而非作为固定格式被永久奖励。</p>
+<p>独立研究支持把定位与关系作为可训练目标。<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Deitke_Molmo_and_PixMo_Open_Weights_and_Open_Data_for_State-of-the-Art_CVPR_2025_paper.pdf">Molmo / PixMo</a> 将指点纳入训练，<a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/f38cb4cf9a5eaa92b3cfa481832719c6-Paper-Conference.pdf">SpatialRGPT</a> 从三维场景关系构造空间训练数据。更近期的 <a href="https://arxiv.org/html/2603.28069">MolmoPoint</a> 用直接选择视觉 token 的方式替代文本坐标，进一步说明具体编码方式会影响学习效率。该研究对一般问答的迁移收益很小且有升有降，也提醒我们：定位能力改善并不自动转化为全面的多模态能力改善。</p>
+<p>因此，我愿意保留的能力定义是：<strong>形成与当前任务有关、能够回指原始证据，并支持后续操作的表征。</strong> 输出形式可以是语言、坐标、程序或内部表示。真正需要训练和评测的是对象对应、关系一致性与组合迁移。</p>
+<p>一个有区分力的实验，应让模型面对未见的对象组合、视角变化和时间顺序变化，分别检查最终任务结果与中间对应关系。还应加入“直接提供正确结构”的条件：如果此时模型仍无法完成任务，瓶颈就不能归结为表征抽取；如果只有特定格式有效，则需要进一步区分格式适配与可迁移的结构理解。</p>
+<h2 id="二-按决策价值获取信息-并组织后续行动">二、按决策价值获取信息，并组织后续行动</h2>
+<h3 id="观察本身需要成为动作">观察本身需要成为动作</h3>
+<p>从 <a href="https://arxiv.org/abs/2310.05002">SKR</a> 的选择性检索、<a href="https://arxiv.org/abs/2311.11598">主动提问式 VQA</a>，到 <a href="https://arxiv.org/abs/2410.04659">ActiView</a> 的局部观察，反复出现的问题是：完成任务的证据未必已经完整地给到模型。</p>
+<p>这不只涉及是否多看一些信息。<a href="https://arxiv.org/abs/2402.15960">预算约束下的工具学习</a> 与 <a href="https://arxiv.org/abs/2403.06551">ToolRerank</a> 关心有限资源如何分配；<a href="https://arxiv.org/abs/2402.12195">Browse and Concentrate</a> 让问题引导更有针对性的多模态信息提取；<a href="https://arxiv.org/abs/2603.15467">EscapeCraft-4D</a> 则把瞬时线索、模态选择和时间约束放到同一个环境中。它们提示，观察的价值取决于当前任务、已有信息和行动时机。</p>
+<p>协作中的信息不对称属于这一问题的重要实例。<a href="https://arxiv.org/abs/2602.13832">Beyond Words</a> 将信念差异与任务完成联系起来；<a href="https://arxiv.org/abs/2608.08210">Illusion of Alignment</a> 通过诊断性问题揭示表面同意背后的分歧。后者提供私有上下文后，模型表现明显改善，因此不能把原有错误全部归因于某种抽象的“心智理论缺陷”。首先要分清，信息是无法获得、尚未获取，还是已经获得却没有正确使用。</p>
+<p>例如，两个人都接受“周五交付”，但一方理解为内部评审，另一方理解为向客户发布。需要补充的是交付状态，而不是一段泛泛的角色分析。训练可以让公开对话保持相同、隐藏条件发生变化，并要求不同的行动。这样才能检验问题是否真正消除了决策中的歧义。</p>
+<h3 id="协作策略已有训练证据-但不能只计算协作收益">协作策略已有训练证据，但不能只计算协作收益</h3>
+<p>多智能体工作不能笼统归为外部流程。<a href="https://arxiv.org/abs/2310.02170">DyLAN</a>、<a href="https://arxiv.org/abs/2503.10200">LVAgent</a> 和<a href="https://arxiv.org/abs/2505.21471">超长外部知识输入</a> 探索了信息分配与动态协作；<a href="https://arxiv.org/abs/2502.14496">CollabUIAgents</a> 与 <a href="https://arxiv.org/abs/2511.19524">VideoChat-M1</a> 则确实训练了协作中的策略。前者的消融支持贡献分配及偏好学习的作用，后者研究了过程奖励和通信结构变化。</p>
+<p>这些结果使“何时分工、交换什么信息、怎样利用他人的结果”成为合理的训练对象。不过，增加智能体也增加采样、通信和工具调用。独立研究 <a href="https://arxiv.org/html/2512.08296">Towards a Science of Scaling Agent Systems</a> 在受控的系统比较中发现，协作收益显著依赖任务能否并行以及通信开销；部分顺序任务反而退化。这是对具体实验条件的观察，不能把某个准确率阈值当成普遍规律，也不能直接否定专门训练的协作策略。</p>
+<p>另一方面，<a href="https://arxiv.org/abs/2505.21055">ALIGN</a> 通过修改环境接口改善智能体表现，<a href="https://arxiv.org/abs/2608.27477">GMA</a> 也显示状态记录等系统设计会影响结果。较低的任务分数并不足以单独诊断模型能力不足。</p>
+<h3 id="下一步训练应增加什么">下一步训练应增加什么？</h3>
+<p><a href="https://arxiv.org/abs/2310.11511">Self-RAG</a>、<a href="https://arxiv.org/abs/2503.09516">Search-R1</a> 以及<a href="https://arxiv.org/abs/2410.13788">依据后续对话结果训练澄清问题的研究</a>，已经提供了按需检索和交互学习的独立证据。“学会主动询问和检索”本身不再是足够具体的建议。</p>
+<p>我认为仍值得检验的是：<strong>把观察、提问、委派与停止统一放在有限预算下，根据它们对后续决策的贡献学习策略。</strong> 这是一种实验组织方式，并不预设它们由同一个内部机制实现。</p>
+<p>训练数据应同时包含“缺少的信息会改变行动”“未知信息与当前行动无关”和“现有手段无法消除不确定性”。评价需要比较直接行动、固定观察流程、学习到的策略，以及直接补齐关键信息的条件。若改善只能由更多调用解释，或者模型总是过度提问，就还没有证明策略学习的价值。跨检索、视觉观察与协作任务的迁移，是这一方向最值得检验、也尚未充分建立的部分。</p>
+<h2 id="三-使评价和修正对证据负责">三、使评价和修正对证据负责</h2>
+<p>从 <a href="https://arxiv.org/abs/2204.00862">CTRLEval（2022）</a> 对生成质量的分项评价，到 <a href="https://arxiv.org/abs/2402.12146">Meta Ranking</a> 的比较校准，再到 <a href="https://arxiv.org/abs/2504.02495">Generalist Reward Modeling / SPCT</a> 的原则生成与批评学习，研究对象逐渐从“得到一个分数”扩展到“这个判断依据什么成立”。</p>
+<p>但显式写出理由并不是可靠性的充分条件。<a href="https://arxiv.org/abs/2508.03550">LAGER</a> 利用模型内部不同层的信息改善与人工判断的相关性，不依赖显式推理文本。它反对的是把“更长、更像论证的评价”直接当成更好的评价，而非否认可核验依据的价值。</p>
+<p><a href="https://arxiv.org/abs/2511.21522">Pessimistic Verification</a> 与 <a href="https://arxiv.org/abs/2411.11910">AIGS</a> 关注关键错误和证伪；<a href="https://arxiv.org/abs/2508.18914">FormaRL</a> 则把形式检查与语义一致性放在一起。这里最重要的区别是：<strong>结果是否通过检查，与检查是否覆盖了原始任务，必须分别判断。</strong> 编译通过不能保证形式化语句表达了原问题；评价与人类标签相关，也不能保证它在被训练过程反复优化时仍然可靠。</p>
+<p>早期的<a href="https://aclanthology.org/2022.acl-long.282/">开放世界知识图谱补全研究</a> 已经涉及不完整标准答案造成的评价失真。它与后来的证明验证形成了方法层面的联系：评价标准本身也可能需要复核。两者的任务和验证手段差异很大，不能据此假定存在一个通用检查器。</p>
+<p>独立研究进一步收紧了训练建议。<a href="https://arxiv.org/abs/2409.12917">SCoRe</a> 展示了多轮强化学习训练纠错的可能性，同时指出离线纠错训练的分布问题；<a href="https://arxiv.org/abs/2511.22570">DeepSeekMath-V2</a> 进一步监督验证意见本身，处理“分数正确、所列错误却不成立”的情况。因此，下一步重点应是错误证据的质量和修正的有效性，而非单纯增加自我反思步骤。</p>
+<p>可训练的行为包括：指出缺失的假设、构造反例、生成能复现故障的测试，以及检查输出是否偏离任务要求。训练集也必须保留正确结果，惩罚无根据的批评。否则，“多找错”可能只是在提高误拒率。</p>
+<p>我会分别评测最终判断、依据是否真实、错误是否足以影响结论，以及修正是否破坏原本正确的部分。对模型新产生的错误也应持续检验，避免只会修复固定教师的错误模式。是否输出评价原则、使用多少轮检查、调用多少个验证器，交给等预算实验决定。</p>
+<h2 id="四-比新增能力名称更直接的训练启发">四、比新增能力名称更直接的训练启发</h2>
+<p>全量回顾后，早期的模型训练、知识迁移和持续学习工作应当占有实质位置。它们未必对应一个可由用户直接调用的能力，却可能更直接地影响下一次训练。</p>
+<h3 id="学习价值随模型状态变化">学习价值随模型状态变化</h3>
+<p><a href="https://nlp.csai.tsinghua.edu.cn/~ly/papers/aiopen23_zqh.pdf">AdaDS（2023）</a> 发现适合知识蒸馏的数据选择策略随任务、数据量和训练阶段变化；<a href="https://aclanthology.org/2023.acl-long.690/">HardPT</a> 区分困难样本的学习价值；<a href="https://arxiv.org/abs/2210.09658">ROSE（2022）</a> 则从参数更新的选择改善鲁棒性。它们不能合并成同一个算法，但共同反对“所有可用信号都应产生同样更新”的默认做法。</p>
+<p>这一问题在近期工作中继续出现。<a href="https://arxiv.org/abs/2506.05760">Writing-RL</a> 调整训练课程和参考质量，<a href="https://arxiv.org/abs/2601.23006">InstructDiff</a> 与 <a href="https://arxiv.org/abs/2609.05899">AlignDiff</a> 根据模型相关信号选择指令或偏好数据；<a href="https://arxiv.org/abs/2510.10974">Critical Token Fine-Tuning</a> 通过替换 token 并重新生成，估计哪些位置影响最终正确性。这些结果支持按学习状态和结果敏感性分配训练信号。</p>
+<p>不过，更难、更低置信度、更细粒度都不是通用答案。<a href="https://arxiv.org/abs/2605.01256">GIFT</a> 利用指令模型的置信信号指导更新；<a href="https://arxiv.org/abs/2604.08865">SPPO</a> 采用序列级价值估计。这些工作与细粒度贡献分配并存，提示合适的粒度取决于奖励结构、估计噪声和成本。CFT 的关键位置是相对于特定模型、候选替换和续写方式定义的，也不能直接解释为唯一的“真实推理步骤”。</p>
+<p>独立研究 <a href="https://proceedings.mlr.press/v235/xia24c.html">LESS</a> 支持利用训练相关信号选择数据；2026 年的<a href="https://arxiv.org/abs/2602.14696">目标指令选择系统比较</a> 则表明，方法排序依赖表示、预算和任务，低预算下的优势会随预算增加而减弱。这更支持一个条件化原则：<strong>数据的学习价值是样本、模型状态与目标的关系，而非样本固定不变的属性。</strong></p>
+<p>下一步应在固定总预算下比较静态筛选、分阶段筛选与在线调整，并把评分、反事实续写和验证成本计入。只报告用了多少训练样本或多少 token，容易高估实际效率。</p>
+<h3 id="吸收新能力时-需要测量失去了什么">吸收新能力时，需要测量失去了什么</h3>
+<p><a href="https://arxiv.org/abs/2105.13880">Knowledge Inheritance</a>、<a href="https://arxiv.org/abs/2203.06311">ELLE</a>、持续多语翻译中的<a href="https://aclanthology.org/2023.acl-long.852/">知识迁移</a>与<a href="https://aclanthology.org/2023.emnlp-main.860/">学习—巩固</a>，以及 <a href="https://arxiv.org/abs/2301.12131">ROGO</a>，从不同角度处理复用、适应与遗忘。后来的<a href="https://arxiv.org/abs/2402.12750">多模态模型组合</a>、<a href="https://arxiv.org/abs/2503.23733">AdaMMS</a> 和 GIFT 则把问题延伸到模块与模型更新的整合。</p>
+<p>这些工作的共同提醒是：新能力的分数不是一次训练的完整收益。还要考察原有知识、指令遵循、跨域表现和不同能力之间的配合。<a href="https://arxiv.org/abs/2508.04117">过度记忆研究</a> 尤其提示，任务准确率看似稳定时，鲁棒性、分布外表现与生成多样性仍可能下降。</p>
+<p>独立的 <a href="https://proceedings.mlr.press/v162/wortsman22a.html">Model Soups</a> 和 <a href="https://papers.neurips.cc/paper_files/paper/2023/hash/1644c9af28ab7916874f6fd6228a9bcf-Abstract-Conference.html">TIES-Merging</a> 说明，已有模型的复用和更新干扰已是明确的研究对象。因此，不能把“模型合并”本身作为新的方向；值得追问的是，哪些能力可以低成本地组合，哪些必须通过联合数据重新学习。</p>
+<p>我会保留的训练要求是：<strong>增加能力、保存能力和组合能力分别评测。</strong> 单模态成绩保存，不足以证明跨模态联合推理已经获得；外部记忆能够检索旧经验，也不等于参数持续学习已解决。早期方案能否适配当前模型，需要重新比较，但这些区分仍应进入训练验收。</p>
+<h2 id="五-哪些主张目前还不应成立">五、哪些主张目前还不应成立？</h2>
+<p><a href="https://arxiv.org/abs/2608.04934">State2State</a> 和 <a href="https://arxiv.org/abs/2608.29305">TTED</a> 值得作为环境学习路线继续研究：前者从到达过的状态构造可验证目标，后者通过环境分解和自评支持测试时学习。但 State2State 的主实验并非等算力比较，单独中期训练也有任务退化；TTED 的自评信号可能继承基础模型的偏差。它们目前更适合放在“如何生成和选择学习经验”之下，尚不足以单独支持一个广泛的自主学习能力主张。<a href="https://arxiv.org/abs/1707.01495">HER</a>、<a href="https://arxiv.org/abs/2505.03335">Absolute Zero</a> 和 <a href="https://arxiv.org/abs/2510.08558">Early Experience</a> 也说明，从交互中构造监督已有清晰先例。新增价值必须在目标质量、迁移和总成本上体现。</p>
+<p><a href="https://arxiv.org/abs/2505.22451">AIM</a>、<a href="https://arxiv.org/abs/2606.24899">人机合作发现量子算法</a> 与 <a href="https://arxiv.org/abs/2608.10894">FormaTheoria</a> 则提示，真实研究包含问题形成、路线选择、依赖补全和标准修订。它们为训练任务提供了比孤立习题更丰富的素材。不过，人的选题判断、路线筛选与修复贡献不能从结果中抹去。个案成功尚不足以证明通用自主科研能力，也不足以确定哪些环节可以通过现有奖励稳定训练。</p>
+<p>一些工作主要贡献于评测、专门架构或应用系统。例如流式视频、连续空间和交互环境基准可以暴露问题；稀疏计算、双曲表示和 SPEC-RL 可以改变效率边界。它们不必分别对应新的行为能力。评测发现的缺陷还要排除接口和信息条件，效率方法则应按准确性与总成本评价。</p>
+<p>“宁缺毋滥”不应意味着只有能起一个能力名称的工作才有后续价值。也不能因为研究线能够被串起来，就把它们写成已经验证的统一理论。</p>
+<h2 id="六-怎样把这些判断变成下一步实验">六、怎样把这些判断变成下一步实验？</h2>
+<p>我会先在当前较强、可重复训练的基线上开展三组小规模实验，并把训练信号分配与能力保持作为共同约束。</p>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>主要比较</th>
+<th>会削弱主张的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可操作表征的组合迁移</td>
+<td>相同信息与预算下，比较自然语言、显式结构及模型内部表示；测试未见组合和视角</td>
+<td>改善只存在于熟悉格式，或结构更准确却没有任务收益</td>
+</tr>
+<tr>
+<td>有成本的信息获取与协作</td>
+<td>比较固定流程、学习策略、直接补齐信息；分别控制调用与通信成本</td>
+<td>收益仅来自更多计算，或过度提问、委派抵消了改善</td>
+</tr>
+<tr>
+<td>有依据的验证与修正</td>
+<td>比较结果奖励与同时检验错误证据的训练；加入正确答案和错误批评</td>
+<td>评价更像论证却不更可靠，误拒和错误修正增加</td>
+</tr>
+</tbody>
+</table>
+<p>每组实验都应报告旧任务表现、分布外迁移和包括数据构造在内的成本。学习信号要比较不同阶段与粒度，而不是预先认定某种课程、评分器或过程奖励最优。若一个外部流程在同等成本下已足够可靠，训练模型还需要证明它改善了迁移、稳定性或自主选择策略的能力。</p>
+<p>对这些工作的后续价值，我能作出的判断是有限的：其中一些已经给出了可复用的训练对象和失效分析，一些只提供了候选机制或任务素材。真正值得进入下一轮训练的部分，应当经受新的模型、任务和预算条件的检验。这也是从论文结果走向能力建设时，最需要补上的证据。</p>
+</div>
+    </article></main>
+    <footer><a href="../../blog/">文章列表</a><span>Peng Li · Research Notes</span></footer>
+  </div>
+</body>
+</html>
